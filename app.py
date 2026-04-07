@@ -73,12 +73,10 @@ def home():
     <a href="/about"><button>About Project 📘</button></a><br><br>
     """
 
-@app.route("/reset")
+@app.route("/reset", methods=["GET", "POST"])
 def reset():
-    global current_state, score
-    current_state = env.reset()
-    score = 0
-    return f"State: {current_state} | Score: {score}"
+    state = env.reset()
+    return jsonify({"state": state})
 
 @app.route("/step/<action>")
 def step(action):
